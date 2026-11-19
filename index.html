@@ -1,134 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PayPilot AI</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>PayPilot AI — Freelancer Payment Hub</title>
 <style>
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f3f6fc;
-color:#172033;
-}
-header{
-background:#101b30;
-color:white;
-padding:22px;
-font-size:25px;
-font-weight:bold;
-}
-header span{color:#80a2ff}
-main{max-width:900px;margin:25px auto;padding:15px}
-h2{font-size:20px}
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-}
-.card,.panel{
-background:white;
-padding:20px;
-border-radius:13px;
-margin-bottom:15px;
-box-shadow:0 2px 12px #00000008;
-}
-.card small{color:#68758b}
-.card h2{font-size:25px;margin-bottom:0}
-input,select,textarea{
-width:100%;
-padding:12px;
-margin:7px 0 15px;
-border:1px solid #dce2ec;
-border-radius:8px;
-font-size:15px;
-}
-button{
-background:#315efb;
-color:white;
-border:0;
-padding:12px 18px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-.green{background:#07966c}
-.delete{background:#d83b3b;padding:7px}
-.invoice{
-border-top:1px solid #eee;
-padding:15px 0;
-display:flex;
-justify-content:space-between;
-gap:10px;
-}
-textarea{min-height:100px}
-@media(max-width:600px){
-.stats{grid-template-columns:1fr}
-}
+:root{--navy:#101827;--blue:#315efb;--ink:#172033;--muted:#66748b;--bg:#f4f7fb;--line:#e5eaf2;--green:#078765;--red:#c43d4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:18px max(18px,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:23px;font-weight:850;letter-spacing:-.7px}.brand span{color:#91aaff}.tag{font-size:12px;color:#c6d0e0}
+main{max-width:1120px;margin:28px auto;padding:0 16px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}.top h1{margin:0 0 5px;font-size:27px}.muted{color:var(--muted);margin:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:22px 0}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 4px 18px #18243a08}.stat{padding:17px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:25px;margin-top:7px;letter-spacing:-.5px}.stat .hint{font-size:11px;color:#8792a5;margin-top:3px}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{padding:19px;margin-bottom:14px}.panel h2{font-size:17px;margin:0 0 14px}
+label{display:block;color:#5e6b80;font-size:12px;font-weight:650;margin:10px 0 5px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #d9e0eb;border-radius:9px;background:#fff;color:var(--ink);font:inherit;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#8ba5ff;box-shadow:0 0 0 3px #315efb15}
+button{border:0;border-radius:9px;padding:11px 14px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer;font:inherit;font-weight:700}
+button:hover{filter:brightness(.96)}.btn-green{background:var(--green)}.btn-light{background:#edf2ff;color:#294ed2}.btn-red{background:#fff0f1;color:var(--red);padding:8px 10px}.btn-small{padding:8px 10px;font-size:12px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.full{grid-column:1/-1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+textarea{min-height:130px;resize:vertical;line-height:1.5}
+.list{margin-top:4px}.rowitem{border-top:1px solid var(--line);padding:13px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.rowitem:first-child{border-top:0}
+.rowitem b{display:block}.rowitem small{display:block;color:var(--muted);margin-top:4px}.row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.badge{font-size:11px;font-weight:700;padding:5px 9px;border-radius:20px;background:#fff3d9;color:#8b5b00;white-space:nowrap}.badge.paid{background:#e1f7ef;color:#087653}
+.empty{padding:15px 0;color:var(--muted);font-size:13px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+footer{text-align:center;color:#8490a4;font-size:12px;padding:20px}
+.notice{background:#eef3ff;border:1px solid #dbe5ff;color:#34518f;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.5;margin-top:10px}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.top h1{font-size:24px}}
+@media(max-width:420px){.stats{grid-template-columns:1fr 1fr}.stat{padding:13px}.stat strong{font-size:21px}.panel{padding:15px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.rowitem{align-items:flex-start;flex-direction:column}.row-actions{justify-content:flex-start}}
+@media print{header,.no-print,footer{display:none!important}body{background:white}.panel,.stat{box-shadow:none;border:1px solid #ddd}main{max-width:none;margin:0;padding:0}.stats{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
-
 <body>
-
-<header>PayPilot <span>AI</span></header>
-
+<header><div class="brand">PayPilot <span>AI</span></div><div class="tag">Freelancer Payment Hub · MVP 2.0</div></header>
 <main>
-
-<h1>Payment Dashboard</h1>
-<p>Manage your invoices. Track payments. Get paid faster.</p>
-
-<div class="stats">
-<div class="card">
-<small>Outstanding</small>
-<h2 id="outstanding">$0</h2>
-</div>
-
-<div class="card">
-<small>Total Invoices</small>
-<h2 id="total">0</h2>
-</div>
-
-<div class="card">
-<small>Received</small>
-<h2 id="received">$0</h2>
-</div>
-</div>
-
-<div class="panel">
-<h2>Create Invoice</h2>
-
-<form id="form">
-
-<label>Client Name</label>
-<input id="client" required placeholder="Client name">
-
-<label>Amount (USD)</label>
-<input id="amount" type="number" min="0.01" step="0.01" required placeholder="250">
-
-<label>Due Date</label>
-<input id="date" type="date" required>
-
-<label>Project Name</label>
-<input id="project" placeholder="Website Design">
-
-<button type="submit">Add Invoice</button>
-
+<div class="top"><div><h1>Good work deserves on-time payment.</h1><p class="muted">Manage clients, invoices and payment follow-ups in one place.</p></div><button class="no-print" id="exportData">Export backup</button></div>
+<section class="stats">
+<div class="stat"><small>Outstanding</small><strong id="outstanding">$0.00</strong><div class="hint">Unpaid invoice balance</div></div>
+<div class="stat"><small>Received</small><strong id="received">$0.00</strong><div class="hint">Marked as paid</div></div>
+<div class="stat"><small>Total invoices</small><strong id="invoiceCount">0</strong><div class="hint">All invoice records</div></div>
+<div class="stat"><small>Clients</small><strong id="clientCount">0</strong><div class="hint">Saved client records</div></div>
+</section>
+<div class="layout">
+<section class="panel">
+<h2>Add a client</h2>
+<form id="clientForm">
+<label for="clientName">Client / business name</label><input id="clientName" required maxlength="80" placeholder="e.g. Jordan Lee">
+<label for="clientEmail">Email (optional)</label><input id="clientEmail" type="email" maxlength="120" placeholder="jordan@example.com">
+<button type="submit">Save client</button>
 </form>
+<div class="list" id="clientList"><div class="empty">No clients added yet.</div></div>
+</section>
+<section class="panel">
+<h2>Create an invoice</h2>
+<form id="invoiceForm">
+<label for="invoiceClient">Client</label><select id="invoiceClient" required><option value="">Add a client first</option></select>
+<div class="form-grid">
+<div><label for="invoiceNumber">Invoice number</label><input id="invoiceNumber" maxlength="30" placeholder="PP-1001"></div>
+<div><label for="amount">Amount (USD)</label><input id="amount" type="number" min="0.01" step="0.01" required placeholder="250.00"></div>
+<div><label for="issueDate">Issue date</label><input id="issueDate" type="date" required></div>
+<div><label for="dueDate">Due date</label><input id="dueDate" type="date" required></div>
+<div class="full"><label for="description">Project / service description</label><input id="description" maxlength="120" placeholder="Website design"></div>
 </div>
-
-<div class="panel">
-<h2>Payment Reminder Generator</h2>
-
-<select id="choose">
-<option value="">Select Invoice</option>
-</select>
-
-<select id="tone">
-<option value="Friendly">Friendly</option>
-<option value="Professional">Professional</option>
-<option value="Firm">Firm</option>
-</select>
-
-<textarea id="message" placeholder="Your payment reminder will appear here"></
+<button type="submit">Create invoice</button>
+</form>
+<div class="notice">PDF download uses your browser’s Print → Save as PDF feature. No payment is processed by this demo.</div>
+</section>
+</div>
+<section class="panel">
+<div class="section-head"><h2>Invoices & payment tracking</h2><select id="filter" class="no-print" style="max-width:150px"><option value="all">All invoices</option><option value="unpaid">Unpaid only</option><option value="paid">Paid only</option></select></div>
+<div class="list" id="invoiceList"><div class="empty">No invoices yet. Add a client and create your first invoice.</div></div>
+</section>
+<div class="layout">
+<section class="panel">
+<h2>Smart payment reminder</h2>
+<label for="reminderInvoice">Choose an unpaid invoice</label><select id="reminderInvoice"><option value="">Select an invoice</option></select>
+<label for="tone">Tone</label><select id="tone"><option value="friendly">Friendly</option><option value="professional">Professional</option><option value="firm">Firm but polite</option></select>
+<label for="reminderText">Message draft</label><textarea id="reminderText" placeholder="Select an invoice, then generate a reminder." readonly></textarea>
+<div class="actions"><button id="generateReminder" type="button">Generate reminder</button><button id="copyReminder" type="button" class="btn-light">Copy message</button></div>
+</section>
+<section class="panel">
+<h2>How this MVP works</h2>
+<p class="muted" style="line-height:1.65">This version stores client and invoice data in this browser on this device. It does not yet include account login, cloud sync, automated email sending, payment collection or an external AI service.</p>
+<div class="notice">Before using with real customers, add secure authentication, a server-side database, privacy controls and proper invoice/tax settings for the relevant country.</div>
+</section>
+</div>
+</main>
+<footer>PayPilot AI · MVP 2.0 · Local browser storage</footer>
+<script>
+const DB='paypilot_v2_data';let db={clients:[],invoices:[]};
+try{const saved=JSON.parse(localStorage.getItem(DB)||'null');if(saved&&Array.isArray(saved.clients)&&Array.isArray(saved.invoices))db=saved}catch(e){}
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0);
+const today=()=>new Date().toISOString().slice(0,10);
+$('issueDate').value=today();
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function save(){localStorage.setItem(DB,JSON.stringify(db));render()}
+function clientById(id){return db.clients.find(c=>c.id===id)}
+function render(){
+ const unpaid=db.invoices.filter(i=>i.status!=='paid').reduce((s,i)=>s+i.amount,0);
+ const paid=db.invoices.filter(i=>i.status==='paid').reduce((s,i)=>s+i.amount,0);
+ $('outstanding').textContent=money(unpaid);$('received').textContent=money(paid);$('invoiceCount').textContent=db.invoices.length;$('clientCount').textContent=db.clients.length;
+ $('clientList').innerHTML=db.clients.length?db.clients.map(c=>`<div class="rowitem"><div><b>${esc(c.name)}</b><small>${esc(c.email||'No email saved')}</small></div><button class="btn-red" data-remove-client="${c.id}">Remove</button></div>`).join(''):'<div class="empty">No clients added yet.</div>';
+ $('invoiceClient').innerHTML='<option value="">Select a client</option>'+db.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
+ const f=$('filter').value;const shown=db.invoices.filter(i=>f==='all'||i.status===f);
+ $('invoiceList').innerHTML=shown.length?shown.slice().reverse().map(i=>{const c=clientById(i.clientId);return `<div class="rowitem"><div><b>${esc(i.number)} · ${esc(c?.name||'Client removed')}</b><small>${esc(i.description||'Services')} · ${money(i.amount)} · Due ${esc(i.dueDate)}</small><span class="badge ${i.status==='paid'?'paid':''}">${i.status==='paid'?'Paid':'Unpaid'}</span></div><div class="row-actions">${i.status!=='paid'?`<button class="btn-green btn-small" data-paid="${i.id}">Mark paid</button>`:''}<button class="btn-light btn-small" data-pdf="${i.id}">Download PDF</button><button class="btn-red" data-delete-invoice="${i.id}">Delete</button></div></div>`}).join(''):'<div class="empty">No invoices match this filter.</div>';
+ const old=$('reminderInvoice').value;$('reminderInvoice').innerHTML='<option value="">Select an invoice</option>'+db.invoices.filter(i=>i.status!=='paid').map(i=>`<option value="${i.id}">${esc(i.number)} · ${money(i.amount)}</option>`).join('');if(db.invoices.some(i=>i.id===old&&i.status!=='paid'))$('reminderInvoice').value=old;
+}
+$('clientForm').addEventListener('submit',e=>{e.preventDefault();const name=$('clientName').value.trim();if(!name)return;db.clients.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,email:$('clientEmail').value.trim()});e.target.reset();save()});
+$('invoiceForm').addEventListener('submit',e=>{e.preventDefault();if(!$('invoiceClient').value){alert('Please add and select a client first.');return}const amount=Number($('amount').value);if(!Number.isFinite(amount)||amount<=0)return;const n=$('invoiceNumber').value.trim()||'PP-'+String(Date.now()).slice(-6);db.invoices.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),clientId:$('invoiceClient').value,number:n,amount,issueDate:$('issueDate').value,dueDate:$('dueDate').value,description:$('description').value.trim(),status:'unpaid'});e.target.reset();$('issueDate').value=today();save()});
+$('clientList').addEventListener('click',e=>{const id=e.target.dataset.removeClient;if(!id)return;if(db.invoices.some(i=>i.clientId===id)){alert('This client has invoices. Delete or reassign those invoices before removing the client.');return}if(confirm('Remove this client?')){db.clients=db.clients.filter(c=>c.id!==id);save()}});
+$('invoiceList').addEventListener('click',e=>{const paid=e.target.dataset.paid,del=e.target.dataset.deleteInvoice,pdf=e.target.dataset.pdf;if(paid){const i=db.invoices.find(x=>x.id===paid);if(i)i.status='paid';save()}if(del&&confirm('Delete this invoice?')){db.invoices=db.invoices.filter(x=>x.id!==del);save()}if(pdf)downloadInvoice(pdf)});
+$('filter').addEventListener('change',render);
+function downloadInvoice(id){const i=db.invoices.find(x=>x.id===id);if(!i)return;const c=clientById(i.clientId)||{name:'Client'};const w=window.open('','_blank');if(!w){alert('Allow pop-ups to create the invoice PDF.');return}w.document.write(`<!doctype html><html><head><title>${esc(i.number)}</title><style>body{font:15px Arial;color:#172033;padding:40px;max-width:760px;margin:auto}h1{color:#172b55}.line{border-top:1px solid #ddd;margin:24px 0;padding-top:15px}.total{font-size:24px;font-weight:bold;text-align:right;margin-top:30px}.muted{color:#66748b}@media print{button{display:none}}</style></head><body><h1>PayPilot AI</h1><p class="muted">INVOICE</p><h2>${esc(i.number)}</h2><p><b>Bill to:</b> ${esc(c.name)}<br>${esc(c.email||'')}</p><p><b>Issue date:</b> ${esc(i.issueDate)}<br><b>Due date:</b> ${esc(i.dueDate)}</p><div class="line"><b>Description</b><p>${esc(i.description||'Professional services')}</p></div><div class="total">Total: ${money(i.amount)}</div><p>Status: ${i.status==='paid'?'PAID':'UNPAID'}</p><p class="muted">Thank you for your business.</p><button onclick="window.print()">Print / Save as PDF</button><script>setTimeout(()=>window.print(),400)<\/script></body></html>`);w.document.close()}
+function reminder(){const i=db.invoices.find(x=>x.id===$('reminderInvoice').value);if(!i){$('reminderText').value='Please select an unpaid invoice.';return}const c=clientById(i.clientId)||{name:'there'};const t=$('tone').value;const intro=t==='friendly'?'Just a friendly reminder about':t==='firm'?'This is a polite follow-up regarding':'I am following up regarding';$('reminderText').value=`Hi ${c.name},\\n\\n${intro} invoice ${i.number} for ${money(i.amount)} (${i.description||'services'}), due on ${i.dueDate}. Could you please confirm when payment is expected?\\n\\nThank you.`}
+$('generateReminder').addEventListener('click',reminder);$('reminderInvoice').addEventListener('change',reminder);$('tone').addEventListener('change',reminder);
+$('copyReminder').addEventListener('click',async()=>{const text=$('reminderText').value;if(!text){alert('Generate a reminder first.');return}try{await navigator.clipboard.writeText(text);alert('Reminder copied.')}catch(e){$('reminderText').removeAttribute('readonly');$('reminderText').select();document.execCommand('copy');$('reminderText').setAttribute('readonly','');alert('Reminder copied.')}});
+$('exportData').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='paypilot-backup.json';a.click();URL.revokeObjectURL(a.href)});
+render();
+</script>
+</body>
+</html>
